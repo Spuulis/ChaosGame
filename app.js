@@ -1,6 +1,9 @@
 var canvas;
 var ctx;
 
+var thickness = 1.0;
+var color = {"fg": "#000000", "bg": "#FFFFFF"};
+
 function init() {
     try {
         canvas = document.getElementById('canvas');
@@ -12,15 +15,37 @@ function init() {
 
 function draw(game, n, prms) {
     let a = game.origin();
-    game.setSize(300, 300);
-    ctx.fillStyle = "#000000";
+    game.setSize(0.0 + canvas.width, 0.0 + canvas.height);
+    ctx.fillStyle = color.fg;
     for(let i = 0; i < n; i++) {
-        ctx.fillRect(a.X, a.Y, 0.5, 0.5);
+        ctx.fillRect(a.X, a.Y, thickness, thickness);
         a = game.next(a, prms);
     }
 }
 
 function clear() {
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillRect(0, 0, 300, 300);
+    ctx.fillStyle = color.bg;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function setSize(width, height) {
+    canvas.width = width;
+    canvas.height = height;
+}
+
+function setThickness(th) {
+    thickness = th;
+}
+
+function setColor(foreground, background) {
+    try {
+        if(/#[1234567890ABCDEFabcdef]{6}/.test(foreground) && /#[1234567890ABCDEFabcdef]{6}/.test(background)) {
+            color.fg = foreground;
+            color.bg = background;
+        } else {
+            throw "Invalid colors.";
+        }
+    } catch(error) {
+        console.error(error);
+    }
 }
