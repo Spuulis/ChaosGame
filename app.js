@@ -14,12 +14,13 @@ function init() {
 }
 
 function draw(game, n, prms) {
-    let a = game.origin();
     game.setSize(0.0 + canvas.width, 0.0 + canvas.height);
+    game.setPrms(prms);
+    let a = game.origin();
     ctx.fillStyle = color.fg;
     for(let i = 0; i < n; i++) {
         ctx.fillRect(a.X, a.Y, thickness, thickness);
-        a = game.next(a, prms);
+        a = game.next(a);
     }
 }
 
