@@ -40,7 +40,7 @@ function setThickness(th) {
 
 function setColor(foreground, background) {
     try {
-        if(/#[1234567890ABCDEFabcdef]{6}/.test(foreground) && /#[1234567890ABCDEFabcdef]{6}/.test(background)) {
+        if(/#[0-9A-Fa-f]{6}/.test(foreground) && /#[0-9A-Fa-f]{6}/.test(background)) {
             color.fg = foreground;
             color.bg = background;
         } else {
