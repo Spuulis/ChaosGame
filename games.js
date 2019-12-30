@@ -51,14 +51,25 @@ class polygon extends game {
     static xScale = 1.0;
     static yScale = 1.0;
     static prms;
-    
+
     static n = 4;
     static vertices = [];
+
+    static last = 0;
+
     static origin() {
+        this.last = 0;
         return {"X": this.xScale, "Y": this.yScale};
     }
     static next(a0) {
-        let v = Math.floor(Math.random() * this.n);
+        let v0 = Math.floor(Math.random() * (this.n - this.prms.rule[this.last].length));
+        let v = v0;
+        for(let i = 0; i < this.prms.rule[this.last].length; i++) {
+            if(this.prms.rule[this.last][i] <= v0) {
+                v++;
+            }
+        }
+        this.last = v;
         return {"X": (a0.X + this.vertices[v].X) / 2, "Y": (a0.Y + this.vertices[v].Y) / 2};
     }
     static setSize(width, height) {
