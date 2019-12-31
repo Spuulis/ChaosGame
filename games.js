@@ -52,6 +52,10 @@ class polygon extends game {
     static yScale = 1.0;
     static prms;
 
+    static prmsLib = {"tictactoe" : {"rule" : [[0],[1],[2],[3]], "N" : 4},
+                      "sierpinski" : {"rule" : [[],[],[]], "N" : 3},
+                      "shift" : {"rule" : [[1],[2],[3],[0]], "N" : 4}};
+
     static n = 4;
     static vertices = [];
 
@@ -79,6 +83,7 @@ class polygon extends game {
     }
     static setPrms(prms) {
         this.prms = prms;
+        this.setN(prms.N);
     }
     static setN(N) {
         this.n = N;
